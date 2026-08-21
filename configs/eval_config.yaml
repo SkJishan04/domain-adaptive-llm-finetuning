@@ -1,0 +1,35 @@
+# Evaluation harness configuration:
+# - domain benchmark measures the targeted capability gain
+# - MMLU / GSM8K measure general-capability retention (forgetting)
+
+benchmarks:
+  domain:
+    enabled: true
+    path: ${DOMAIN_EVAL_PATH:./data/domain_eval/legal_eval.jsonl}
+    type: "multiple_choice"
+    max_samples: null
+
+  mmlu:
+    enabled: true
+    hf_dataset: "cais/mmlu"
+    hf_config: "all"
+    split: "test"
+    type: "multiple_choice"
+    max_samples: 500
+
+  gsm8k:
+    enabled: true
+    hf_dataset: "openai/gsm8k"
+    hf_config: "main"
+    split: "test"
+    type: "generative_exact_match"
+    max_samples: 250
+    max_new_tokens: 256
+
+generation:
+  temperature: 0.0
+  do_sample: false
+
+output:
+  results_dir: ./outputs/evaluation
+  baseline_results_path: ./outputs/evaluation/base_model_baseline.json
