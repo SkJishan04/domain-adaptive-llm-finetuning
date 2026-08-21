@@ -1,0 +1,30 @@
+# Stage 2: Supervised Instruction Fine-Tuning on top of the CPT adapter
+stage: sft
+
+model:
+  base_model_name: ${BASE_MODEL_NAME:unsloth/llama-3-8b-bnb-4bit}
+  max_seq_length: 2048
+  load_in_4bit: true
+  cpt_adapter_dir: ${CPT_ADAPTER_DIR:./outputs/cpt}
+
+data:
+  instructions_path: ${DOMAIN_INSTRUCTIONS_PATH:./data/instructions/legal_instructions.jsonl}
+  val_split: 0.1
+  response_template: "### Response:\n"
+
+training:
+  output_dir: ${SFT_ADAPTER_DIR:./outputs/sft}
+  num_train_epochs: 3
+  per_device_train_batch_size: 4
+  gradient_accumulation_steps: 4
+  learning_rate: 1.0e-4
+  lr_scheduler_type: "cosine"
+  warmup_ratio: 0.05
+  weight_decay: 0.01
+  logging_steps: 10
+  save_strategy: "epoch"
+  eval_strategy: "epoch"
+  seed: 42
+  optim: "adamw_8bit"
+  report_to: "wandb"
+  packing: false
