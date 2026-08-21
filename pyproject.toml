@@ -1,0 +1,31 @@
+[project]
+name = "domain-adaptive-llm-finetuning"
+version = "0.1.0"
+description = "Two-stage (CPT + SFT) domain-adaptive LLM fine-tuning pipeline with catastrophic-forgetting evaluation."
+requires-python = ">=3.10"
+readme = "README.md"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+src = ["src", "scripts", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.10"
+ignore_missing_imports = true
+disallow_untyped_defs = false
+warn_unused_ignores = true
+exclude = ["^outputs/", "^checkpoints/"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra -q"
+pythonpath = ["."]
+
+[tool.coverage.run]
+source = ["src"]
+omit = ["src/training/*", "src/evaluation/benchmarks.py"]
