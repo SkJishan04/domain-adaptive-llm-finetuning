@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+.venv/
+venv/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+htmlcov/
+.coverage
+
+# Env
+.env
+
+# Model artifacts / outputs
+outputs/
+checkpoints/
+*.bin
+*.safetensors
+*.gguf
+wandb/
+
+# OS
+.DS_Store
