@@ -1,0 +1,1 @@
+"""Test suite: unit and API tests runnable without a GPU."""
