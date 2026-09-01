@@ -2,7 +2,7 @@
 stage: cpt
 
 model:
-  base_model_name: ${BASE_MODEL_NAME:unsloth/llama-3-8b-bnb-4bit}
+  base_model_name: null
   max_seq_length: 2048
   load_in_4bit: true
   dtype: null  # auto-detect (bf16 if supported, else fp16)
@@ -24,11 +24,11 @@ lora:
 
 data:
   block_size: 2048
-  corpus_dir: ${DOMAIN_CORPUS_DIR:./data/domain_corpus}
+  corpus_dir: ./data/domain_corpus
   val_split: 0.05
 
 training:
-  output_dir: ${CPT_ADAPTER_DIR:./outputs/cpt}
+  output_dir: ./outputs/cpt
   num_train_epochs: 1
   per_device_train_batch_size: 2
   gradient_accumulation_steps: 8
