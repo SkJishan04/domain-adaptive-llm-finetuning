@@ -2,7 +2,7 @@
 torch>=2.2.0
 unsloth @ git+https://github.com/unslothai/unsloth.git
 transformers>=4.42.0
-trl>=0.9.6
+trl==0.9.6
 peft>=0.11.1
 accelerate>=0.31.0
 bitsandbytes>=0.43.1
