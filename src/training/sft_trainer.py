@@ -85,7 +85,11 @@ class SFTTrainer:
     def _build_trainer(
         self, model: Any, tokenizer: Any, train_ds: Any, val_ds: Any
     ) -> Any:
-        from trl import DataCollatorForCompletionOnlyLM, SFTConfig as TRLSFTConfig
+        try:
+            from trl import DataCollatorForCompletionOnlyLM
+        except ImportError:
+            from trl.trainer.utils import DataCollatorForCompletionOnlyLM
+        from trl import SFTConfig as TRLSFTConfig
         from trl import SFTTrainer as TRLSFTTrainer
 
         collator = DataCollatorForCompletionOnlyLM(
