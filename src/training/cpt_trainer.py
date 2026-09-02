@@ -78,6 +78,7 @@ class CPTTrainer:
         self, model: Any, tokenizer: Any, train_ds: Any, val_ds: Any
     ) -> Any:
         from transformers import DataCollatorForLanguageModeling, Trainer, TrainingArguments
+        from unsloth import is_bf16_supported
 
         args = TrainingArguments(
             output_dir=str(self.config.output_dir),
@@ -94,7 +95,8 @@ class CPTTrainer:
             seed=self.config.seed,
             optim=self.config.optim,
             report_to=self.config.report_to,
-            bf16=True,
+            bf16=is_bf16_supported(),
+            fp16=not is_bf16_supported(),
         )
         collator = DataCollatorForLanguageModeling(tokenizer=tokenizer, mlm=False)
 
